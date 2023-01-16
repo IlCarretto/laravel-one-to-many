@@ -3,6 +3,9 @@
 @section('content')
     <div class="container">
         <h1 class="text-center mt-3">{{ $project->title }}</h1>
+        <div class="other-info d-flex justify-content-end">
+            {{ $project->type ? $project->type->name : 'unknown type' }}
+        </div>
         <div class="mt-3 d-flex justify-content-between">
             <h5>{{ $project->created_at }}</h5>
             <p>{{ $project->slug }}</p>

@@ -9,7 +9,7 @@
                     enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
-                    <div class="title-container">
+                    <div class="title-container mt-3">
                         <label for="title">Titolo del progetto</label>
                         <input
                             class="form-control @error('title')
@@ -22,7 +22,23 @@
                             </div>
                         @enderror
                     </div>
-                    <div class="image-container">
+                    <div class="select-group mt-3">
+                        <label for="type">Scegli il tipo di progetto</label>
+                        <select name="type_id" id="type" class="form-select @error('type_id') is-invalid @enderror">
+                            <option disabled selected value></option>
+                            @foreach ($types as $type)
+                                <option value="{{ $type->id }}">
+                                    {{ old($type->name, $type->name) }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('type_id')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <div class="image-container mt-3">
                         <label for="image">Modifica l'immagine</label>
                         <input type="file" name="image" id="image"
                             class="form-control @error('image')
@@ -34,14 +50,14 @@
                             </div>
                         @enderror
                     </div>
-                    <div class="image-preview text-center">
+                    <div class="image-preview text-center mt-3">
                         @if ($project->image)
                             <img src="{{ asset('storage/' . $project->image) }}" alt="" class="w-25">
                         @else
                             <p class=mt-3>No images found yet</p>
                         @endif
                     </div>
-                    <div class="text-container">
+                    <div class="text-container mt-3">
                         <label for="proj_description">Descrizione del progetto</label>
                         <textarea name="proj_description" id="proj_description" rows="10"
                             class="form-control @error('proj_description')
