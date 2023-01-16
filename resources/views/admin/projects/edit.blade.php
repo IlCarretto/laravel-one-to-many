@@ -25,10 +25,9 @@
                     <div class="select-group mt-3">
                         <label for="type">Scegli il tipo di progetto</label>
                         <select name="type_id" id="type" class="form-select @error('type_id') is-invalid @enderror">
-                            <option disabled selected value></option>
                             @foreach ($types as $type)
-                                <option value="{{ $type->id }}">
-                                    {{ old($type->name, $type->name) }}
+                                <option value="{{ $type->id }}" @selected($project->type?->id == $type->id)>
+                                    {{ $type->name }}
                                 </option>
                             @endforeach
                         </select>
